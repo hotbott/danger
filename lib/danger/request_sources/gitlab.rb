@@ -33,10 +33,7 @@ module Danger
         # The require happens inline so that it won't cause exceptions when just using the `danger` gem.
         require "gitlab"
 
-        params = { private_token: token }
-        params[:endpoint] = endpoint
-
-        @client ||= Gitlab.client(params)
+        @client ||= Gitlab.client(endpoint: endpoint, private_token: token)
       rescue LoadError
         puts "The GitLab gem was not installed, you will need to change your Gem from `danger` to `danger-gitlab`.".red
         puts "\n - See https://github.com/danger/danger/blob/master/CHANGELOG.md#400"
@@ -52,7 +49,8 @@ module Danger
       end
 
       def endpoint
-        @endpoint ||= @environment["DANGER_GITLAB_API_BASE_URL"] || "https://gitlab.com/api/v3"
+        @endpoint ||= @environment["DANGER_GITLAB_API_BASE_URL"] ||
+                      "https://gitlab.com/api/v4"
       end
 
       def host
@@ -66,7 +64,8 @@ module Danger
 
       def mr_comments
         @comments ||= begin
-          client.merge_request_comments(ci_source.repo_slug, ci_source.pull_request_id)
+          client.merge_request_comments(ci_source.repo_slug, ci_source.pull_request_id, per_page: 100)
+            .auto_paginate
             .map { |comment| Comment.from_gitlab(comment) }
         end
       end
@@ -93,7 +92,9 @@ module Danger
 
       def fetch_details
         self.mr_json = client.merge_request(ci_source.repo_slug, self.ci_source.pull_request_id)
-        self.commits_json = client.merge_request_commits(ci_source.repo_slug, self.ci_source.pull_request_id)
+        self.commits_json = client.merge_request_commits(
+          ci_source.repo_slug, self.ci_source.pull_request_id
+        ).auto_paginate
         self.ignored_violations = ignored_violations_from_pr
       end
 
@@ -132,7 +133,10 @@ module Danger
           else
             original_id = editable_comments.first.id
             client.edit_merge_request_comment(
-              ci_source.repo_slug, ci_source.pull_request_id, original_id, body
+              ci_source.repo_slug,
+              ci_source.pull_request_id,
+              original_id,
+              { body: body }
             )
           end
         end

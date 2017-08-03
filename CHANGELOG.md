@@ -1,10 +1,104 @@
 ## master
 
-* Add your own contribution below
+* Add your own contributions to the next release on the line below this, please include your name too. Please don't set a new version if you are the first to make the section for `master`.
+
+## 5.4.0
+
+* Request reviewers for a Pull Request - [@hotbott](https://github.com/hotbott)
+
+## 5.3.4
+
+This release adds compatibility for GitLab API v4, you need to update the [danger-gitlab gem](https://github.com/danger/danger-gitlab-gem) to be version `6.x` when you migrate to the new API. 👍
+
+* Add actual support for [buddybuild](https://buddybuild.com) - [@palleas](https://github.com/palleas)
+* Add ability to add multiple messages - [@sleekybadger](https://github.com/sleekybadger)
+* Use gitlab api v4, instead of deprecated v3 - [@sleekybadger](https://github.com/sleekybadger)
+* Add support for GitLabCI - [@sleekybadger](https://github.com/sleekybadger)
+
+
+## 5.3.3
+
+* Add to documentation for TeamCity CI setup - [@atelic](https://github.com/atelic)
+* Show more error detail for UnprocessableEntity - [@litmon](https://github.com/litmon)
+* Use latest [octokit](https://github.com/octokit/octokit.rb) pr reviews functionality - [@antondomashnev](https://github.com/antondomashnev)
+
+## 5.3.2
+
+* Fix plugins search list to gitlab - [@leonhartX](https://github.com/leonhartX)
+* Explicitly encode the results of `git` executions in UTF-8 - [@nikhilmat](https://github.com/nikhilmat)
+* Adds BitbucketServer to XcodeServer's supported_request_sources
+[@anreitersimon](https://github.com/anreitersimon)
+
+## 5.3.1
+
+* Fixes for duplicated GitHub inline comments - [@litmon](https://github.com/litmon)
+* Fix wrong commits count for PR's that have more than 30 commits - [@sleekybadger](https://github.com/sleekybadger)
+* Fix markdown links to files in messages - [@ffittschen](https://github.com/ffittschen)
+
+## 5.3.0
+
+* Improve remotes parsing for init command - [@sleekybadger](https://github.com/sleekybadger)
+* Adds ability to get the whole diff object at `git.diff` - This lets you do
+  more fine grained checks on the raw changes. - [@sleekybadger](https://github.com/sleekybadger)
+* Add ability to set dismiss_out_of_range_messages per each message kinds. - [@giginet](https://github.com/giginet)
+
+## 5.2.2
+
+* Fix FileList returning arrays - [@sleekybadger](https://github.com/sleekybadger)
+* Fix broken violations order for github - [@sleekybadger](https://github.com/sleekybadger)
+
+## 5.2.1
+
+* Add ability to get list of renamed files - [@sleekybadger](https://github.com/sleekybadger)
+
+## 5.2.0
+
+* Add support for DotCi - Daniel Beard
+* Send Dangerfile eval exceptions to PR - [@sleekybadger](https://github.com/sleekybadger)
+
+## 5.1.1
+
+* Consider all comments when looking for existing danger comments in Gitlab MRs.
+
+## 5.1.0
+
+* Improved DroneCI support for versions 0.4+ - [@fmartingr](https://github.com/fmartingr)
+* Made DroneCI still work with older version - [@k0nserv](https://github.com/k0nserv)
+
+
+## 5.0.3
+
+* Automates the add GitHub release notes when we release via [chandler](https://github.com/mattbrictson/chandler) - orta
+* Updates Danger's tests to use the gitlab 4.0 gem - orta
+* #790 Fixes issue with BitbucketServer crashing when `DANGER_BITBUCKETSERVER_HOST` is not set - orta
+
+## 5.0.2
+
+* #787 Fixes issue with `use_ssl` for bitbucket server integration. - RishabhTayal
+* #788 Fix `diff_for_file` for added files - allewun
+
+
+## 5.0.1
+
+* #785 Added support for `http://` for bitbucket server integration. - RishabhTayal
+
+## 5.0.0
+
+* #681, #498 - Fixes handling of files moved across directories by using diff to get list of modified files. Please note that the fix is not backward-compatible due to moved files names being the original file names - nikolaykasyanov
+
+  This is very likely not break any Dangerfiles out there, but it's better to be safe. So we're bumping the version number to let everyone know there _could_ be a risk. - orta
+
+## 4.3.4
+
+* #775 Fixed calling undefined method `start_with`
+
+## 4.3.4
+
+* Fix danger init - Kohki Miki
 
 ## 4.3.3
 
-* Add actual file URL to `danger.import_dangerfile(github:)` (supports private repositories and GitHub Enterprise now)
+* `danger.import_dangerfile(github:)` now supports private repositories and GitHub Enterprise - hotbott
 
 
 ## 4.3.2
